@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:flowable="http://flowable.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://flowable.org/test">
+  <process id="MerkezBankRobustaCZ" name="MerkezBankRobustaCZ" isExecutable="true">
+    <dataObject id="minBpPriority" name="minBpPriority" itemSubjectRef="xsd:string">
+      <extensionElements>
+        <flowable:value>50</flowable:value>
+      </extensionElements>
+    </dataObject>
+    <dataObject id="humanEffort" name="humanEffort" itemSubjectRef="xsd:string">
+      <extensionElements>
+        <flowable:value>0</flowable:value>
+      </extensionElements>
+    </dataObject>
+    <dataObject id="processModelExportedHistoryVersion" name="processModelExportedHistoryVersion" itemSubjectRef="xsd:string">
+      <extensionElements>
+        <flowable:value>v1</flowable:value>
+      </extensionElements>
+    </dataObject>
+    <startEvent id="startEvent1" flowable:formFieldValidation="true"></startEvent>
+    <serviceTask id="sid-47A245F9-91E2-4FEE-8209-EA1A1DC499C7" name="Applications - Open-Site açılır" flowable:async="true" flowable:exclusive="false" flowable:class="com.robusta.robot.web.WebOpenTask" flowable:type="CustomWebOpen">
+      <extensionElements>
+        <flowable:field name="resultbrowser">
+          <flowable:string><![CDATA[MerkezBankasiRobusta]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="type">
+          <flowable:string><![CDATA[CHROME]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="url">
+          <flowable:string><![CDATA[https://www.tcmb.gov.tr/wps/wcm/connect/TR/TCMB+TR]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="pageload">
+          <flowable:string><![CDATA[true]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="maximize">
+          <flowable:string><![CDATA[true]]></flowable:string>
+        </flowable:field>
+      </extensionElements>
+    </serviceTask>
+    <sequenceFlow id="sid-1D6D030C-E969-4822-B9B8-75A9D5F0E4C3" sourceRef="startEvent1" targetRef="sid-47A245F9-91E2-4FEE-8209-EA1A1DC499C7"></sequenceFlow>
+    <serviceTask id="sid-891F54BE-EAF9-45C8-9466-ACAF222DEA59" name="Applications - Set methods-Enflasyon yazılır" flowable:async="true" flowable:exclusive="false" flowable:class="com.robusta.robot.web.WebSetTask" flowable:type="CustomWebSet">
+      <extensionElements>
+        <flowable:field name="browserId">
+          <flowable:expression><![CDATA[${MerkezBankasiRobusta}]]></flowable:expression>
+        </flowable:field>
+        <flowable:field name="field">
+          <flowable:string><![CDATA[//input[@id="search-query"]]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="clear">
+          <flowable:string><![CDATA[false]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="action">
+          <flowable:string><![CDATA[text]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="text">
+          <flowable:string><![CDATA[enflasyon]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="visible">
+          <flowable:string><![CDATA[true]]></flowable:string>
+        </flowable:field>
+      </extensionElements>
+    </serviceTask>
+    <sequenceFlow id="sid-3A44BEE2-646D-4C33-9F24-17B0A75EA78C" sourceRef="sid-47A245F9-91E2-4FEE-8209-EA1A1DC499C7" targetRef="sid-891F54BE-EAF9-45C8-9466-ACAF222DEA59"></sequenceFlow>
+    <serviceTask id="sid-F0ABDA36-0CE5-4E32-9471-32908E55C6D5" name="Applications - Mouse actions-arama gerçekleşir" flowable:async="true" flowable:exclusive="false" flowable:class="com.robusta.robot.web.WebMouseTask" flowable:type="CustomWebMouse">
+      <extensionElements>
+        <flowable:field name="browserId">
+          <flowable:expression><![CDATA[${MerkezBankasiRobusta}]]></flowable:expression>
+        </flowable:field>
+        <flowable:field name="button">
+          <flowable:string><![CDATA[LEFT]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="field">
+          <flowable:string><![CDATA[//a[@class="search-button-tcmb w-inline-block"]]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="dbl">
+          <flowable:string><![CDATA[false]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="pageload">
+          <flowable:string><![CDATA[true]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="visible">
+          <flowable:string><![CDATA[true]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="hover">
+          <flowable:string><![CDATA[false]]></flowable:string>
+        </flowable:field>
+      </extensionElements>
+    </serviceTask>
+    <serviceTask id="sid-5FC16449-7104-4C69-8010-D3B38B58B2C3" name="Applications - Get methods-Sonuç al" flowable:async="true" flowable:exclusive="false" flowable:class="com.robusta.robot.web.WebGetTask" flowable:type="CustomWebGet">
+      <extensionElements>
+        <flowable:field name="browserId">
+          <flowable:expression><![CDATA[${MerkezBankasiRobusta}]]></flowable:expression>
+        </flowable:field>
+        <flowable:field name="field">
+          <flowable:string><![CDATA[//body/div[2]/div[1]/main[1]/section[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="action">
+          <flowable:string><![CDATA[text]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="resultvariable">
+          <flowable:string><![CDATA[sonuc]]></flowable:string>
+        </flowable:field>
+      </extensionElements>
+    </serviceTask>
+    <sequenceFlow id="sid-F2D613D2-8B5B-4524-8707-2BEDC9715076" sourceRef="sid-F0ABDA36-0CE5-4E32-9471-32908E55C6D5" targetRef="sid-5FC16449-7104-4C69-8010-D3B38B58B2C3"></sequenceFlow>
+    <serviceTask id="sid-88FBF24A-5649-49CC-A9D3-9AF457F8413D" name="Applications - Close" flowable:async="true" flowable:exclusive="false" flowable:class="com.robusta.robot.web.WebCloseTask" flowable:type="CustomWebClose">
+      <extensionElements>
+        <flowable:field name="browserId">
+          <flowable:expression><![CDATA[${MerkezBankasiRobusta}]]></flowable:expression>
+        </flowable:field>
+      </extensionElements>
+    </serviceTask>
+    <endEvent id="sid-72274DF6-0DDD-46F9-BA8E-13977EB0200B"></endEvent>
+    <sequenceFlow id="sid-B9EC1B4A-CF32-4435-BA4C-269C7FF49F69" sourceRef="sid-88FBF24A-5649-49CC-A9D3-9AF457F8413D" targetRef="sid-72274DF6-0DDD-46F9-BA8E-13977EB0200B"></sequenceFlow>
+    <sequenceFlow id="sid-5F420E83-40A4-497F-A54A-5547E40A6122" sourceRef="sid-891F54BE-EAF9-45C8-9466-ACAF222DEA59" targetRef="sid-F0ABDA36-0CE5-4E32-9471-32908E55C6D5"></sequenceFlow>
+    <serviceTask id="sid-76822864-9B03-4622-9F6D-6B945CD5B98E" name="Applications - Mouse actions-Anasayfaya dön" flowable:async="true" flowable:exclusive="false" flowable:class="com.robusta.robot.web.WebMouseTask" flowable:type="CustomWebMouse">
+      <extensionElements>
+        <flowable:field name="browserId">
+          <flowable:expression><![CDATA[${MerkezBankasiRobusta}]]></flowable:expression>
+        </flowable:field>
+        <flowable:field name="button">
+          <flowable:string><![CDATA[LEFT]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="field">
+          <flowable:string><![CDATA[//a[@class="logo-tcmb w-inline-block"]//img[1]]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="dbl">
+          <flowable:string><![CDATA[false]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="pageload">
+          <flowable:string><![CDATA[true]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="visible">
+          <flowable:string><![CDATA[true]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="hover">
+          <flowable:string><![CDATA[false]]></flowable:string>
+        </flowable:field>
+      </extensionElements>
+    </serviceTask>
+    <sequenceFlow id="sid-91188ACA-3379-400F-A3E9-1C317C9980DD" sourceRef="sid-5FC16449-7104-4C69-8010-D3B38B58B2C3" targetRef="sid-76822864-9B03-4622-9F6D-6B945CD5B98E"></sequenceFlow>
+    <serviceTask id="sid-3B7BABEA-4CF8-4942-BCF8-D5D0886C93AE" name="Applications - Mouse actions-Bugüne tıkla" flowable:async="true" flowable:exclusive="false" flowable:class="com.robusta.robot.web.WebMouseTask" flowable:type="CustomWebMouse">
+      <extensionElements>
+        <flowable:field name="browserId">
+          <flowable:expression><![CDATA[${MerkezBankasiRobusta}]]></flowable:expression>
+        </flowable:field>
+        <flowable:field name="button">
+          <flowable:string><![CDATA[LEFT]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="field">
+          <flowable:string><![CDATA[//a[@class="inverse more-button"]]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="dbl">
+          <flowable:string><![CDATA[false]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="pageload">
+          <flowable:string><![CDATA[true]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="visible">
+          <flowable:string><![CDATA[true]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="hover">
+          <flowable:string><![CDATA[false]]></flowable:string>
+        </flowable:field>
+      </extensionElements>
+    </serviceTask>
+    <sequenceFlow id="sid-AA992E2A-C9C5-459D-B6F3-3D31947D0F0B" sourceRef="sid-76822864-9B03-4622-9F6D-6B945CD5B98E" targetRef="sid-3B7BABEA-4CF8-4942-BCF8-D5D0886C93AE"></sequenceFlow>
+    <serviceTask id="sid-2F90E35F-5744-4435-8BE7-360744E36953" name="Applications - Scrape data-Tablo al" flowable:async="true" flowable:exclusive="false" flowable:class="com.robusta.robot.web.WebScrapTask" flowable:type="CustomWebScrap">
+      <extensionElements>
+        <flowable:field name="browserId">
+          <flowable:expression><![CDATA[${MerkezBankasiRobusta}]]></flowable:expression>
+        </flowable:field>
+        <flowable:field name="resultscraper">
+          <flowable:string><![CDATA[KurlarTablosu]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="table">
+          <flowable:string><![CDATA[//body/main[1]/div[1]/div[2]/div[1]/div[1]/table[1]]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="header">
+          <flowable:string><![CDATA[thead[1]/tr[1]/th]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="row">
+          <flowable:string><![CDATA[tbody[1]/tr]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="col">
+          <flowable:string><![CDATA[td]]></flowable:string>
+        </flowable:field>
+      </extensionElements>
+    </serviceTask>
+    <sequenceFlow id="sid-4D3AE17D-BB4A-40BC-A5A5-13683D71D10D" sourceRef="sid-3B7BABEA-4CF8-4942-BCF8-D5D0886C93AE" targetRef="sid-2F90E35F-5744-4435-8BE7-360744E36953"></sequenceFlow>
+    <serviceTask id="sid-585D1852-A527-4911-B795-82D3513F35F8" name="Dataset - Save as-Excel olarak kayıt" flowable:async="true" flowable:exclusive="false" flowable:class="com.robusta.robot.file.FileWriteTask" flowable:type="CustomFileWrite">
+      <extensionElements>
+        <flowable:field name="resultSetId">
+          <flowable:expression><![CDATA[${KurlarTablosu}]]></flowable:expression>
+        </flowable:field>
+        <flowable:field name="fileName">
+          <flowable:string><![CDATA[C:\RobustaTemp\Kurlar.xlsx]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="type">
+          <flowable:string><![CDATA[EXCEL]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="delimeter">
+          <flowable:string><![CDATA[,]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="hasHeader">
+          <flowable:string><![CDATA[true]]></flowable:string>
+        </flowable:field>
+      </extensionElements>
+    </serviceTask>
+    <sequenceFlow id="sid-62644D11-2E14-4063-BDC8-A67CDD8270D6" sourceRef="sid-2F90E35F-5744-4435-8BE7-360744E36953" targetRef="sid-585D1852-A527-4911-B795-82D3513F35F8"></sequenceFlow>
+    <serviceTask id="sid-91EB8EA3-E85C-47FB-8C78-5B2F726C9A9C" name="Applications - Mouse actions" flowable:async="true" flowable:exclusive="false" flowable:class="com.robusta.robot.web.WebMouseTask" flowable:type="CustomWebMouse">
+      <extensionElements>
+        <flowable:field name="browserId">
+          <flowable:expression><![CDATA[${MerkezBankasiRobusta}]]></flowable:expression>
+        </flowable:field>
+        <flowable:field name="button">
+          <flowable:string><![CDATA[LEFT]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="field">
+          <flowable:string><![CDATA[//a[@class="search-button-tcmb w-inline-block"]]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="dbl">
+          <flowable:string><![CDATA[false]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="pageload">
+          <flowable:string><![CDATA[false]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="visible">
+          <flowable:string><![CDATA[false]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="hover">
+          <flowable:string><![CDATA[false]]></flowable:string>
+        </flowable:field>
+      </extensionElements>
+    </serviceTask>
+    <sequenceFlow id="sid-B5206874-AB59-421D-B4DA-8A9993D90EA5" sourceRef="sid-585D1852-A527-4911-B795-82D3513F35F8" targetRef="sid-91EB8EA3-E85C-47FB-8C78-5B2F726C9A9C"></sequenceFlow>
+    <intermediateCatchEvent id="sid-B10CF30D-3CEC-417C-8768-B7175E328047">
+      <timerEventDefinition>
+        <timeDuration>PT3S</timeDuration>
+      </timerEventDefinition>
+    </intermediateCatchEvent>
+    <sequenceFlow id="sid-3FBEAD0A-8C4D-402A-9D3A-209ECE9EFA4F" sourceRef="sid-91EB8EA3-E85C-47FB-8C78-5B2F726C9A9C" targetRef="sid-B10CF30D-3CEC-417C-8768-B7175E328047"></sequenceFlow>
+    <serviceTask id="sid-31A1D401-D8A1-4907-9CAE-6ACA3AEED18F" name="Applications - Alert actions" flowable:async="true" flowable:exclusive="false" flowable:class="com.robusta.robot.web.WebAlertTask" flowable:type="CustomWebAlert">
+      <extensionElements>
+        <flowable:field name="browserId">
+          <flowable:expression><![CDATA[${MerkezBankasiRobusta}]]></flowable:expression>
+        </flowable:field>
+        <flowable:field name="action">
+          <flowable:string><![CDATA[accept]]></flowable:string>
+        </flowable:field>
+      </extensionElements>
+    </serviceTask>
+    <sequenceFlow id="sid-E4E835A4-BFF8-46FD-8F57-CB975C25CE8E" sourceRef="sid-B10CF30D-3CEC-417C-8768-B7175E328047" targetRef="sid-31A1D401-D8A1-4907-9CAE-6ACA3AEED18F"></sequenceFlow>
+    <sequenceFlow id="sid-691320A8-D14F-416B-B102-079EFD44CB0E" sourceRef="sid-31A1D401-D8A1-4907-9CAE-6ACA3AEED18F" targetRef="sid-88FBF24A-5649-49CC-A9D3-9AF457F8413D"></sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_MerkezBankRobustaCZ">
+    <bpmndi:BPMNPlane bpmnElement="MerkezBankRobustaCZ" id="BPMNPlane_MerkezBankRobustaCZ">
+      <bpmndi:BPMNShape bpmnElement="startEvent1" id="BPMNShape_startEvent1">
+        <omgdc:Bounds height="30.0" width="30.0" x="100.0" y="163.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-47A245F9-91E2-4FEE-8209-EA1A1DC499C7" id="BPMNShape_sid-47A245F9-91E2-4FEE-8209-EA1A1DC499C7">
+        <omgdc:Bounds height="80.0" width="100.0" x="191.5" y="142.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-891F54BE-EAF9-45C8-9466-ACAF222DEA59" id="BPMNShape_sid-891F54BE-EAF9-45C8-9466-ACAF222DEA59">
+        <omgdc:Bounds height="80.0" width="100.0" x="345.0" y="146.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-F0ABDA36-0CE5-4E32-9471-32908E55C6D5" id="BPMNShape_sid-F0ABDA36-0CE5-4E32-9471-32908E55C6D5">
+        <omgdc:Bounds height="80.0" width="100.0" x="495.0" y="146.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-5FC16449-7104-4C69-8010-D3B38B58B2C3" id="BPMNShape_sid-5FC16449-7104-4C69-8010-D3B38B58B2C3">
+        <omgdc:Bounds height="80.0" width="100.0" x="644.6280788507357" y="146.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-88FBF24A-5649-49CC-A9D3-9AF457F8413D" id="BPMNShape_sid-88FBF24A-5649-49CC-A9D3-9AF457F8413D">
+        <omgdc:Bounds height="80.0" width="100.0" x="247.93387648105227" y="260.33057030510486"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-72274DF6-0DDD-46F9-BA8E-13977EB0200B" id="BPMNShape_sid-72274DF6-0DDD-46F9-BA8E-13977EB0200B">
+        <omgdc:Bounds height="28.0" width="28.0" x="173.5537135367365" y="286.33057030510486"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-76822864-9B03-4622-9F6D-6B945CD5B98E" id="BPMNShape_sid-76822864-9B03-4622-9F6D-6B945CD5B98E">
+        <omgdc:Bounds height="80.0" width="100.0" x="793.3884047393672" y="146.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-3B7BABEA-4CF8-4942-BCF8-D5D0886C93AE" id="BPMNShape_sid-3B7BABEA-4CF8-4942-BCF8-D5D0886C93AE">
+        <omgdc:Bounds height="80.0" width="100.0" x="942.1487306279985" y="149.25619238053653"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-2F90E35F-5744-4435-8BE7-360744E36953" id="BPMNShape_sid-2F90E35F-5744-4435-8BE7-360744E36953">
+        <omgdc:Bounds height="80.0" width="100.0" x="942.1487306279985" y="260.33057030510486"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-585D1852-A527-4911-B795-82D3513F35F8" id="BPMNShape_sid-585D1852-A527-4911-B795-82D3513F35F8">
+        <omgdc:Bounds height="80.0" width="100.0" x="793.3884047393672" y="260.33057030510486"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-91EB8EA3-E85C-47FB-8C78-5B2F726C9A9C" id="BPMNShape_sid-91EB8EA3-E85C-47FB-8C78-5B2F726C9A9C">
+        <omgdc:Bounds height="80.0" width="100.0" x="647.1074160392252" y="260.33057030510486"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-B10CF30D-3CEC-417C-8768-B7175E328047" id="BPMNShape_sid-B10CF30D-3CEC-417C-8768-B7175E328047">
+        <omgdc:Bounds height="31.0" width="31.0" x="556.8140315437622" y="284.83057030510486"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-31A1D401-D8A1-4907-9CAE-6ACA3AEED18F" id="BPMNShape_sid-31A1D401-D8A1-4907-9CAE-6ACA3AEED18F">
+        <omgdc:Bounds height="80.0" width="100.0" x="405.78510959766766" y="260.33057030510486"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="sid-AA992E2A-C9C5-459D-B6F3-3D31947D0F0B" id="BPMNEdge_sid-AA992E2A-C9C5-459D-B6F3-3D31947D0F0B">
+        <omgdi:waypoint x="893.338404739367" y="187.093348031044"></omgdi:waypoint>
+        <omgdi:waypoint x="942.1487306279985" y="188.16174990701901"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-3FBEAD0A-8C4D-402A-9D3A-209ECE9EFA4F" id="BPMNEdge_sid-3FBEAD0A-8C4D-402A-9D3A-209ECE9EFA4F">
+        <omgdi:waypoint x="647.1074160392252" y="300.53150618034374"></omgdi:waypoint>
+        <omgdi:waypoint x="588.76390516162" y="300.76620697118"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-B5206874-AB59-421D-B4DA-8A9993D90EA5" id="BPMNEdge_sid-B5206874-AB59-421D-B4DA-8A9993D90EA5">
+        <omgdi:waypoint x="793.388404739312" y="300.33057030510486"></omgdi:waypoint>
+        <omgdi:waypoint x="747.0574160390561" y="300.33057030510486"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-5F420E83-40A4-497F-A54A-5547E40A6122" id="BPMNEdge_sid-5F420E83-40A4-497F-A54A-5547E40A6122">
+        <omgdi:waypoint x="444.9499999999581" y="186.0"></omgdi:waypoint>
+        <omgdi:waypoint x="495.0" y="186.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-62644D11-2E14-4063-BDC8-A67CDD8270D6" id="BPMNEdge_sid-62644D11-2E14-4063-BDC8-A67CDD8270D6">
+        <omgdi:waypoint x="942.1487306279752" y="300.33057030510486"></omgdi:waypoint>
+        <omgdi:waypoint x="893.3384047393671" y="300.33057030510486"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-E4E835A4-BFF8-46FD-8F57-CB975C25CE8E" id="BPMNEdge_sid-E4E835A4-BFF8-46FD-8F57-CB975C25CE8E">
+        <omgdi:waypoint x="556.8141474223723" y="300.76221174580024"></omgdi:waypoint>
+        <omgdi:waypoint x="505.7351095976585" y="300.5439790897427"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-4D3AE17D-BB4A-40BC-A5A5-13683D71D10D" id="BPMNEdge_sid-4D3AE17D-BB4A-40BC-A5A5-13683D71D10D">
+        <omgdi:waypoint x="992.1487306279985" y="229.20619238053655"></omgdi:waypoint>
+        <omgdi:waypoint x="992.1487306279985" y="260.33057030510486"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-691320A8-D14F-416B-B102-079EFD44CB0E" id="BPMNEdge_sid-691320A8-D14F-416B-B102-079EFD44CB0E">
+        <omgdi:waypoint x="405.7851095975002" y="300.33057030510486"></omgdi:waypoint>
+        <omgdi:waypoint x="347.88387648099115" y="300.33057030510486"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-F2D613D2-8B5B-4524-8707-2BEDC9715076" id="BPMNEdge_sid-F2D613D2-8B5B-4524-8707-2BEDC9715076">
+        <omgdi:waypoint x="594.9499999998615" y="186.0"></omgdi:waypoint>
+        <omgdi:waypoint x="644.6280788507357" y="186.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-B9EC1B4A-CF32-4435-BA4C-269C7FF49F69" id="BPMNEdge_sid-B9EC1B4A-CF32-4435-BA4C-269C7FF49F69">
+        <omgdi:waypoint x="247.93387648101736" y="300.33057030510486"></omgdi:waypoint>
+        <omgdi:waypoint x="201.5036452428332" y="300.33057030510486"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-1D6D030C-E969-4822-B9B8-75A9D5F0E4C3" id="BPMNEdge_sid-1D6D030C-E969-4822-B9B8-75A9D5F0E4C3">
+        <omgdi:waypoint x="129.9424967294701" y="178.47249581765624"></omgdi:waypoint>
+        <omgdi:waypoint x="191.49999999999926" y="180.41897233201584"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-3A44BEE2-646D-4C33-9F24-17B0A75EA78C" id="BPMNEdge_sid-3A44BEE2-646D-4C33-9F24-17B0A75EA78C">
+        <omgdi:waypoint x="291.4499999999982" y="183.30162866449513"></omgdi:waypoint>
+        <omgdi:waypoint x="344.99999999999966" y="184.6970684039088"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-91188ACA-3379-400F-A3E9-1C317C9980DD" id="BPMNEdge_sid-91188ACA-3379-400F-A3E9-1C317C9980DD">
+        <omgdi:waypoint x="744.5780788507275" y="186.0"></omgdi:waypoint>
+        <omgdi:waypoint x="793.3884047393095" y="186.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>
